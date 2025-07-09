@@ -51,7 +51,7 @@ Para poder elaborar nuestra primer pagina basada en un Single Page Application, 
         <a href="/contact" data-link>Contacto</a>
     </nav>
     <main id="root"></main>
-    <script src="app/index.js" type="module"></script>
+    <script src="app/App.js" type="module"></script>
 </body>
 </html>
 ```
@@ -88,9 +88,9 @@ El router es el que nos permitirá intercambiar entre las vistas que le mostrare
 
     //creamos una variable que contendrá nuestras rutas
     const routes = {
-        "/": "views/home.html",
-        "About": "views/about.html",
-        "Contact": "views/contact.html"
+        "/": "/app/views/home.html",
+        "About": "/app/views/about.html",
+        "Contact": "/app/views/contact.html"
     };
     ```
 - **Creamos una función que se encargará de cargar la vista**
@@ -104,10 +104,10 @@ El router es el que nos permitirá intercambiar entre las vistas que le mostrare
 - **Creamos la función que se encargará de renderizar las vistas al html**
     ```javascript
     export async function renderView(url){
-        const path = routes[url] || "view/home.html"; //obtiene la ruta a renderizar, la vista por defecto siempre será la de Home
+        const path = routes[url] || "/app/views/home.html"; //obtiene la ruta a renderizar, la vista por defecto siempre será la de Home
         try{
             const response = await fetch(path); //obtiene la estructura de la ruta
-            const html = response.text(); //transforma la respuesta en tipo texto
+            const html = await response.text(); //transforma la respuesta en tipo texto
 
             document.getElementById("root").innerHTML = html; //se incerta al html la respuesta ya convertida
         }catch (error){
@@ -137,3 +137,13 @@ El router es el que nos permitirá intercambiar entre las vistas que le mostrare
     };
     ```
     Esta función se encargará de capturar el evento "click" cada vez que ocurra dentro del body del archivo html, obteniendo la url del enlace a la que se le aplique el evento, a su vez, trabajamos con los botones de adelantar o retroceso de la pagina.
+
+### 4. Importar nuestro Router al archivo principal de JS
+```javascript
+//Importamos la funcion que inicia nuestro router al archivo principal js que se comunica con el index.html
+import { initRouter } from "./router.js";
+
+document.addEventListener("DOMContentLoaded", function(){
+    initRouter();
+});
+```
