@@ -13,8 +13,7 @@ Una pagina creada en base al Single Page Application (SPA) es aquella que con so
 ├── /app
 │   ├── App.js
 │   ├── /assets
-│   │   ├── favicon.png
-│   │   └── logo-ChessGo.png
+│   │
 │   ├── router.js
 │   ├── /styles
 │   │   └── style.css
@@ -23,7 +22,7 @@ Una pagina creada en base al Single Page Application (SPA) es aquella que con so
 │       ├── contact.html
 │       └── home.html
 ├── index.html
-└── REAME.md
+└── README.md
 ```
 
 ## Construcción de un SPA
